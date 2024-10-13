@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">                             
+        <div class="container mt-5">
+            <h1 class="mb-4">Edit Receipt</h1>
+            <div class="receipt mb-4">
+                <div class="card" >
+                    <div class="card-body" style="color: grey;">
+                        <h1>Edit Receipt and Line Items</h1>
+                            <form method="post">
+                                {% csrf_token %}
+
+                                <!-- Form for Extracting Results -->
+                                <h3>Receipt Details</h3>
+                                {{ form.as_p }}
+                            
+                                <!-- Formset for Line Items -->
+                                <h3>Line Items</h3>
+                                {{ formset.management_form }}
+                                {% for form in formset %}
+                                    <div class="line-item">
+                                        {{ form.as_p }}
+                                    </div>
+                                {% endfor %}
+                                
+                                <button class="btn btn-primary mt-3" type="submit">Save Changes</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

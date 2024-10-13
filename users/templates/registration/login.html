@@ -1,0 +1,37 @@
+{% extends "accounts/base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<body>   
+    <section class="container">
+        <div class="login-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
+                <h1 class="opacity">LOGIN</h1>
+                {% if messages %}
+                <br/>
+                  {% for message in messages %}
+                      <section class="message {{message.tags}}">{{message}}</section>
+                  {% endfor %} 
+                {% endif %}
+                   
+                <form action="{% url 'login' %}" method="POST"> 
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn-danger btn-round m-2" type="submit">Submit</button>
+                </form>
+                <div class="register-forget opacity">
+                    <a href="{% url 'SignUp' %}">REGISTER</a><br>
+                    <a href="{% url 'password_reset' %}">FORGOT PASSWORD?</a>
+                </div>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+</body>
+    
+{% endblock %}

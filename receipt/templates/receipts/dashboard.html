@@ -1,0 +1,95 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+      <div class="content">
+        <div class="row">
+          <div class="col-12">
+            <div class="card card-chart">
+              <div class="card-header ">
+                {% if messages %}
+                <br/>
+                  {% for message in messages %}
+                      <section class="alert {{message.tags}}">{{message}}</section>
+                  {% endfor %} 
+                {% endif %}
+                
+                <div class="row">
+                  <div class="col-sm-6 text-left">
+                    <h5 class="card-category"><b>Total Expenses</b></h5>
+                    <h2 class="card-title">Expenses per Month</h2>
+                  </div>               
+                  <div class="col-sm-6 text-right">
+                    <h4 class="card-category"><b>Total Year</b></h4>
+                    <h2 class="card-title">
+                        {% for year_total in year_totals_list %}
+                            <h5>{{ year_total.year|date:"Y" }}: €{{ year_total.total_amount |floatformat:2 }}</h5>
+                        {% endfor %}
+                    </h2>
+                  </div>                 
+                </div>
+              </div>     
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <div class="table-responsive">
+                  <div class="chart-area">     
+                      <canvas id="lineChart"></canvas>
+                  </div>
+                  <div class="btn-group btn-group-toggle float-right" >
+                    <label class="btn btn-sm btn-primary btn-simple active" id="0">
+                      <button id="currentYearBtn" class="d-none d-sm-block d-md-block d-lg-block d-xl-block" >Current Year ({{ current_year }})</button>
+                    </label>
+                    <label class="btn btn-sm btn-primary btn-simple" id="1">
+                      <button id="previousYearBtn" class="d-none d-sm-block d-md-block d-lg-block d-xl-block" >Previous Year({{ previous_year }})</button>
+                    </label>
+                  </div>
+                </div>                              
+                
+                <script>
+                  // graph started
+                  const ctxYear = document.getElementById('lineChart').getContext('2d');
+                  let lineChart = new Chart(ctxYear, {
+                      type: 'line',
+                      data: {
+                          labels: {{ monthly_chart_data.labels|safe }},
+                          datasets: [{
+                              label: 'Total Month',
+                              data: {{ monthly_chart_data.data|safe }},
+                              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                              borderColor: 'rgba(75, 192, 192, 1)',
+                              borderWidth: 2
+                          }]
+                      },
+                      options: {
+                          scales: {
+                              y: {
+                                  beginAtZero: true
+                              }
+                          }
+                      }
+                  });
+                
+                  document.getElementById('currentYearBtn').addEventListener('click', function() {
+                      const url = `?year={{ current_year }}`;
+                      console.log('Current Year URL:', url);  // Debug
+                      window.location.href = url;
+                  });
+                
+                  document.getElementById('previousYearBtn').addEventListener('click', function() {
+                      const url = `?year={{ previous_year }}`;
+                      console.log('Previous Year URL:', url);  // Debug
+                      window.location.href = url;
+                  });
+              </script>
+            </div>
+          </div>
+        </div>
+        <!--__________________2 Graph______________-->
+
+        {% include 'receipts/graph_two.html' %}
+
+      </div>
+
+{% endblock %}
+  

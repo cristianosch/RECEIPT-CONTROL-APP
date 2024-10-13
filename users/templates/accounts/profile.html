@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<body>
+    <div class="content">
+        <div class="row">                 
+           <div class="card card-chart">
+                <div class="card-header ">
+                    <div class='card'>
+                        <h4 class="text-center"> Here you can set a target amount for spending per month. </h4>
+                        <h1 class="text-center"> Edit Profile </h1>
+                   {% if messages %}
+                   <br/>
+                     {% for message in messages %}
+                         <section class="alert {{message.tags}}">{{message}}</section>
+                     {% endfor %} 
+                   {% endif %}
+                   
+                   {% if profile %}
+                   <div class="post-img text-center m-5">
+                       <img src="{{profile.avatar.url}}" class="img-fluid rounded" alt="Avatar" height="400"
+                       width="200" >                            
+                   </div>
+                   {% endif %}
+                   <form class="text-center" action="dashboard" id="profile" method="POST" enctype="multipart/form-data">
+                       {% csrf_token %}
+                       {{form.as_p}}
+                       <button class="btn btn-danger btn-round m-2" type="submit">Submit</button>
+                   </form>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

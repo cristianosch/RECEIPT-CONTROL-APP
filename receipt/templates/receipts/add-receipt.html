@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<link href="{% static 'css/add-receipt.css' %}" rel="stylesheet" />
+        
+<style>
+    
+</style>
+<div class="content">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Upload Recipt</h1>
+                    {% if messages %}
+                    <br/>
+                      {% for message in messages %}
+                          <section class="alert {{message.tags}}">{{message}}</section>
+                      {% endfor %} 
+                    {% endif %}
+
+                    <!-- Formulário para submissão da imagem -->
+                    <form class="text-center" id="receiptForm" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input class="btn-round m-2" type="file" name="image" id="receiptInput" onchange="previewImage(event);">
+                        <button class="btn btn-danger btn-round m-2" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/add-receipt.js' %}"></script>  
+
+{% endblock %}

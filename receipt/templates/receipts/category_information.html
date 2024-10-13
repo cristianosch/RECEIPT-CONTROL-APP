@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- GRAPH STARTS -->
+<div class="content">
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-chart">
+        <div class="card-header">
+          
+          <div class="row">
+            <div class="col-sm-10 text-left">
+              <h5 class="card-category"><b>Total Expenses</b></h5>
+              <h2 class="card-title">Expenses per Month By Category</h2>
+            </div>                                  
+          </div>               
+          <div class="row align-items-md-stretch">
+            {% for month, img_src in monthly_chart_images.items %}                  
+              <div class="col-md-4">       
+                <br>   
+                <h3>{{ month }}</h3>
+                <img src="{{ img_src }}" alt="Pie chart for {{ month }}" width="400" height="250">
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>
+</div>
+
+{% endblock %}

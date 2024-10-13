@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Add receipt Manualy</h1>
+                    
+                    {% if messages %}
+                    <br/>
+                      {% for message in messages %}
+                          <section class="alert {{message.tags}}">{{message}}</section>
+                      {% endfor %} 
+                    {% endif %}
+
+                    <form id="form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div>
+                            <h3>Receipt Information</h3>
+                            {{ form.as_p }}       
+                        </div>  
+                        <!-- Renderizar o formset de line items -->    
+                        <div id="line-items">           
+                            <h4>Itens:</h4>
+                            {{ line_item_formset.management_form }}
+
+                            <!-- Loop para renderizar cada form de item do formset -->
+                            {% for form in line_item_formset %}
+                            <div class="line-item">
+                                {{ form.as_p }}
+                                <button class="btn btn-danger btn-sm m-2 remove-item" type="button">Remove</button>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                         <!-- Botão para adicionar novo item -->
+                         <button class="btn btn-success m-2" type="button" id="add-item">Add Item</button>
+
+                         <!-- Botão de submissão do formulário -->
+                         <div>
+                            <button class="btn  btn-sm m-2" type="submit"><span>Submit</span></button>
+                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript para adicionar/remover dinamicamente os items -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let totalForms = document.querySelector('#id_line_items-TOTAL_FORMS');
+        let formCount = parseInt(totalForms.value);
+
+        // Template de form vazio para adicionar novos itens sem clonar valores preenchidos
+        const emptyFormTemplate = document.querySelector('.line-item').cloneNode(true);
+        emptyFormTemplate.querySelectorAll('input').forEach(input => {
+            input.value = ''; // Limpa os valores dos campos ao clonar
+        });
+
+        // Função para adicionar um novo item
+        document.getElementById('add-item').addEventListener('click', function() {
+            const newForm = emptyFormTemplate.cloneNode(true);
+            const formRegex = new RegExp(`-(\\d+)-`, 'g');
+
+            // Atualiza os atributos do novo form para corresponder ao novo índice
+            newForm.innerHTML = newForm.innerHTML.replace(formRegex, `-${formCount}-`);
+            document.querySelector('#line-items').appendChild(newForm);
+            formCount++;
+            totalForms.value = formCount; // Atualiza o total de forms
+        });
+
+        // Função para remover um item
+        document.querySelector('#line-items').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-item')) {
+                e.target.closest('.line-item').remove();
+                formCount--;
+                totalForms.value = formCount; // Atualiza o total de forms
+            }
+        });
+    });
+</script>
+{% endblock %}

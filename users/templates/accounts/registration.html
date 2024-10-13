@@ -1,0 +1,32 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+   
+    <section class="container">
+        <div class="registration-container">            
+            <div class="registration-container-form">               
+                <h1 class="opacity">Registration</h1>
+                {% if messages %}
+                <br/>
+                  {% for message in messages %}
+                      <section class="alert {{message.tags}}">{{message}}</section>
+                  {% endfor %} 
+                {% endif %}
+                <form action="dashboard"  method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn-danger btn-round m-2" type="submit">Submit</button>
+                </form>
+                <div class="registration-forget opacity">
+                    <a href="{% url 'login' %}">LOGIN</a>                            
+                </div>
+            </div>           
+        </div>
+        <div class="theme-btn-container"></div>
+    </section>
+
+
+{% endblock %}

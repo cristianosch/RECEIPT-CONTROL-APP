@@ -1,0 +1,34 @@
+.text-box {    
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;    
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #333cc4c4;
+    background-clip: border-box;
+    border: 0.0625rem solid rgb(255, 255, 255);
+    border-radius: 0.2857rem;    
+    margin: auto;    
+    padding: 10px;
+    color: aliceblue;
+} 
+
+
+
+@media only screen and (max-width: 600px) {
+    .text-box {
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .text-box {
+        margin-right: auto;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .text-box {
+        margin-: auto;
+    }
+}

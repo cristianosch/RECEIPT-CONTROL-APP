@@ -1,0 +1,184 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">       
+                      
+                <div class="container mt-5">
+                    <h1 class="mb-4">Receipts for {{ month }} {{ year }}</h1>
+                    {% for receipt_data in receipts_data %}
+                    <div class="receipt mb-4">
+                        <div class="card" >
+                            <div class="card-header">
+                                <h3 class="card-title">Receipt Details</h3>
+                                <button class="btn btn-warning float-right" ><a href="{% url 'edit_receipt' receipt_data.extraction_results.id %}"><i class="tim-icons icon-pencil"></i></a></button>
+                            </div>
+                            <div class="card-body" style="color: grey;">
+                                <div class="row">
+                                    <div class="col-md-2">
+
+                                        {% if receipt_data.receipt.image %}
+
+                                        <!-- Image -->
+                                        <div class="table-image-wrapper">
+                                            <!-- Imagem pequena na tabela -->
+                                            <img src="{{ receipt_data.receipt.image.url }}" alt="Receipt Image" class="table-image" onclick="openModal()">
+                                        </div>
+
+                                        {% else %}                                                             
+                                            No pic
+                                        {% endif %}
+                                        
+                                        <!-- Modal para exibir a imagem grande -->
+                                        <div id="imageModal" class="modal" >
+                                            <span class="modal-close" onclick="closeModal()">&times;</span>
+                                            <img class="modal-content" id="modalImage">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date (Purchase)</th>
+                                                        <th>Locale</th>
+                                                        <th>Shop Name</th>
+                                                        <th>Category</th>
+                                                        <th>Total Tax</th>
+                                                        <th>Total Amount</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% if receipt_data.extraction_results %}
+                                                        <tr>
+                                                            <td>{{ receipt_data.extraction_results.extracted_date }}</td>
+                                                            <td>{{ receipt_data.extraction_results.extracted_locale }}</td>
+                                                            <td class="table-success"><span style="color: black;">{{ receipt_data.extraction_results.extracted_shop_name }}</span></td>
+                                                            <td style="text-transform: capitalize;">{{ receipt_data.extraction_results.extracted_category }}</td>
+                                                            <td>{{ receipt_data.extraction_results.extracted_total_tax }}</td>
+                                                            <td class="table-danger"><span style="color: black;">{{ receipt_data.extraction_results.extracted_total_amount }}</span></td>
+                                                            
+                                                        </tr>
+                                                    {% else %}
+                                                        <tr>
+                                                            <td colspan="6">No extraction results found.</td>
+                                                        </tr>
+                                                    {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <h5 class="mt-4">List of Items:</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-dark">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Quantity</th>
+                                                <th>Unit Price</th>
+                                                <th>Total Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in receipt_data.extracted_items %}
+                                                <tr>
+                                                    <td>{{ item.description }}</td>
+                                                    <td>{{ item.quantity }}</td>
+                                                    <td>{{ item.unit_price }}</td>
+                                                    <td>{{ item.total_amount }}</td>
+                                                </tr>
+                                            {% empty %}
+                                                <tr>
+                                                    <td colspan="4">No items found for this receipt.</td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No receipts found for {{ month }} {{ year }}.</p>
+                {% endfor %}
+            </div>
+          </div>
+        
+      </div>
+   
+</div>
+<style>
+/* Estilo da imagem pequena */
+.table-image {
+    width: 30%; 
+    height: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Estilo para o modal (imagem expandida) */
+.modal {
+    display: none; /* Esconde o modal por padrão */
+    position: fixed;
+    z-index: 1000;  
+    left: 15%;
+    top: 10%;
+    width: 75%;
+    height: 50%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo semitransparente */
+    overflow: auto;
+}
+
+/* Estilo da imagem dentro do modal */
+.modal-content {
+    display: block;
+    margin-top: 10%;
+    margin-left: 20%;
+    max-width: 60%;
+    max-height: 70%;
+    transition: transform 0.3s ease;
+}
+
+/* Fechar o modal */
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Fechar modal ao clicar */
+.modal-close:hover, .modal-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: red;
+}
+
+</style>    
+<script>
+// Função para abrir o modal e exibir a imagem grande
+function openModal() {
+    var modal = document.getElementById("imageModal");
+    var modalImg = document.getElementById("modalImage");
+    var imgSrc = event.target.src;
+    modal.style.display = "block";
+    modalImg.src = imgSrc;
+}
+
+// Função para fechar o modal
+function closeModal() {
+    var modal = document.getElementById("imageModal");
+    modal.style.display = "none";
+}
+</script>
+{% endblock %}

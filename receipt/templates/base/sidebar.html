@@ -1,0 +1,49 @@
+{% load static %}
+<!-- SIDEBAR -->
+<div class="sidebar" >
+    <div class="sidebar-wrapper ">
+      <div class="logo">
+        <a href="/" class="simple-text text-center" >
+          Receipt Manager App
+        </a>
+      </div>
+      <ul class="nav">
+        <li class="active ">
+          <a href="/">
+            <i class="tim-icons icon-chart-pie-36"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <li>
+         <a href="{% url 'add-receipt' %}">
+            <i class="tim-icons icon-attach-87"></i>
+            <p>Add Receipt</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'add_manual_receipt' %}">
+             <i class="tim-icons icon-attach-87"></i>
+             <p>Form</p>
+           </a>
+         </li>
+        <li>
+          <a href="{% url 'receipts' %}">
+            <i class="tim-icons icon-calendar-60"></i>
+            <p>List By Month</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'category_information' %}">
+            <i class="tim-icons icon-puzzle-10"></i>
+            <p>Category Info</p>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'profile' %}">
+            <i class="tim-icons icon-single-02"></i>
+            <p>User Profile</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
