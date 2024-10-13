@@ -78,6 +78,6 @@ Para contribuir com <RECEIPT-CONTROL-APP>, siga estas etapas:
 Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 <div style="display: inline_block">
-    <img height="170em" width="400" src="pictures/dashboard.png"/>
-    <img height="170em" width="400" src="pictures/dash-responsive.png"/>
+    <img height="200px" width="400" src="pictures/dashboard.png"/>
+    <img height="400px" width="200px" src="pictures/dash-responsive.png"/>
 </div>
