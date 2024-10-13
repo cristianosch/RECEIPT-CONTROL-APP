@@ -78,14 +78,14 @@ Para contribuir com <RECEIPT-CONTROL-APP>, siga estas etapas:
 Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 <div style="display: inline_block">
-    <img height="200px" width="400" src="pictures/dashboard.png"/> 
+    <img height="200px" width="400" src="pictures/dashboard.png"/> <br>
     Main Dahsboard
-    <img height="200px" width="400" src="pictures/detail.png"/> 
+    <img height="200px" width="400" src="pictures/detail.png"/> <br>
     Details abstracted from receipts
-    <img height="400px" width="200px" src="pictures/dash-responsive.png"/> 
+    <img height="400px" width="200px" src="pictures/dash-responsive.png"/> <br>
     Responsive
-    <img height="400px" width="200px" src="pictures/month.png"/> 
+    <img height="400px" width="200px" src="pictures/month.png"/> <br>
     Receipts organized by months
-    <img height="400px" width="200px" src="pictures/month-detail.png"/> 
+    <img height="400px" width="200px" src="pictures/month-detail.png"/> <br>
     Graph with visual demonstration of expenses divided by category
 </div>
