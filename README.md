@@ -1,7 +1,7 @@
 # Receipt Control App - Django and Mindee Integration
 
-<img src="receipt-example.png" >
-> Example of payment receipt and data capture
+<img src="pictures/receipt-example.png" >
+    Example of payment receipt and data capture
 
 ## Overview
 
@@ -76,3 +76,8 @@ Para contribuir com <RECEIPT-CONTROL-APP>, siga estas etapas:
 5. Crie a solicitação de pull.
 
 Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+
+<div style="display: inline_block">
+    <img height="170em" width="400" src="pictures/dashboard.png"/>
+    <img height="170em" width="400" src="pictures/dash-responsive.png"/>
+</div>
