@@ -180,55 +180,6 @@ def add_receipt(request):
     return render(request, 'receipts/add-receipt.html', {'form': form})
 
  
-'''                        #### FUNCIONANDO COMENTADO PARA FAZER O TESTE COM O REDIS ####
-@login_required
-def add_receipt(request):
-    if request.method == 'POST':
-        form = ReceiptForm(request.POST, request.FILES)
-        if form.is_valid():
-            # Salva o formulário e a imagem
-            receipt = form.save()
-
-            # Chama a função de extração de dados usando o Mindee
-            extracted_data = receipt.extract_data()
-
-            if extracted_data:
-                # Salva os dados extraídos no banco de dados
-                extraction = ExtractingResults.objects.create(
-                    receipt=receipt,
-                    extracted_locale=extracted_data.get('extracted_locale'),
-                    extracted_shop_name=extracted_data.get('extracted_shop_name'),
-                    extracted_category=extracted_data.get('extracted_category'),
-                    extracted_date=extracted_data.get('extracted_date'),
-                    extracted_total_tax=extracted_data.get('extracted_total_tax'),
-                    extracted_total_amount=extracted_data.get('extracted_total_amount')
-                )
-
-                for line_item_data in extracted_data.get('line_items', []):
-                    ExtractedLineItem.objects.create(
-                        extraction=extraction,
-                        description=line_item_data.get('description'),
-                        quantity=line_item_data.get('quantity'),
-                        unit_price=line_item_data.get('unit_price'),
-                        total_amount=line_item_data.get('total_amount')
-                    )
-                # Exibe mensagem de confirmação dos dados
-                messages.success(request, 'Receipt saved and data extracted successfully!')
-                return render(request, 'receipts/add-receipt.html')  
-
-            else:
-                # Se a extração falhar, renderize o formulário novamente com uma mensagem de erro
-                form.add_error(None, "Falha ao extrair dados da imagem.")
-        else:
-            # Se o formulário não for válido, mostre os erros
-            form.add_error(None, "Erro ao processar o formulário.")
-    
-    else:
-        form = ReceiptForm()
-
-    return render(request, 'receipts/add-receipt.html', {'form': form})
-'''
-
 @login_required
 def receipts_by_month(request, year, month):
     # Obtenha os resultados da extração filtrados pela data extraída (extracted_date)
