@@ -19,6 +19,7 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from .tasks import process_image_extraction
 
 
 def get_last_three_months():
@@ -155,8 +156,31 @@ class CategoryTable(LoginRequiredMixin, TemplateView):
 
         context['monthly_extracted_category_totals'] = monthly_extracted_category_totals
         return context
- 
+    
+    
+@login_required
+def add_receipt(request):
+    if request.method == 'POST':
+        form = ReceiptForm(request.POST, request.FILES)
+        if form.is_valid():
+            receipt = form.save()
 
+            # Chama a tarefa Celery para processar a extração da imagem
+            process_image_extraction.delay(receipt.id)
+
+            messages.success(request, 'Receipt saved successfully! Extraction is processing in the background.')
+            return redirect('receipts')
+
+        else:
+            form.add_error(None, "Erro ao processar o formulário.")
+    
+    else:
+        form = ReceiptForm()
+
+    return render(request, 'receipts/add-receipt.html', {'form': form})
+
+ 
+'''                        #### FUNCIONANDO COMENTADO PARA FAZER O TESTE COM O REDIS ####
 @login_required
 def add_receipt(request):
     if request.method == 'POST':
@@ -203,7 +227,7 @@ def add_receipt(request):
         form = ReceiptForm()
 
     return render(request, 'receipts/add-receipt.html', {'form': form})
-
+'''
 
 @login_required
 def receipts_by_month(request, year, month):

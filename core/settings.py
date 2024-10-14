@@ -15,6 +15,7 @@ from django.contrib.messages import constants
 from dotenv import load_dotenv
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,7 +48,8 @@ INSTALLED_APPS = [
     'chartjs',
     'receipt',
     'receipt_form',    
-    'users',
+    'users',    
+    'django_celery_results', 
 ]
 
 MIDDLEWARE = [
@@ -161,3 +163,21 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER ')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# CELERY setup
+
+CELERY_BROKER_URL = 'REDIS://127.0.0.1:6379/0'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+'''
+
+# Configuração do Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'  # URL do Redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'  # Ajuste conforme o seu fuso horário
+'''

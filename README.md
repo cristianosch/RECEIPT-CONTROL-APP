@@ -57,13 +57,15 @@ To run this project locally, you’ll need:
 
 The project is still under development and the next updates will focus on the following tasks:
 
-- [x] Creating models for the database
-- [x] Preparing templates
-- [x] Preparing the scenario for accepting the upload or photograph, and abstracting the data to the database
+- [x] Created models for the database
+- [x] Prepared templates
+- [x] Prepared the scenario for accepting the upload or photograph, and abstracting the data to the database
 - [x] Sort receipts by month of purchase
-- [x] Creating tables with receipt information
-- [x] Create logic to compare costs between months and years
+- [x] Created tables with receipt information
+- [x] Created logic to compare costs between months and years
+- [x] Manual form to add itens
 - [x] User creation / login / register
+- [x] Celery - Installed and configured
   
 ## 📫 Contribuindo para RECEIPT-CONTROL-APP
 
