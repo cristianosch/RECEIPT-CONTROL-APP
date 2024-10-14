@@ -13,7 +13,7 @@ contourpy==1.3.0
 cryptography==43.0.1
 cycler==0.12.1
 defusedxml==0.7.1
-Django==5.0.2
+Django==5.0.9
 django-allauth==0.61.1
 django-celery-results==2.5.1
 django-chartjs==2.3.0
