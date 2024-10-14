@@ -28,12 +28,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-<<<<<<< HEAD
 #ALLOWED_HOSTS = ['89.116.38.163', 'cristianodev.com']
 ALLOWED_HOSTS = ['localhost']
-=======
-ALLOWED_HOSTS = ['89.116.38.163', 'cristianodev.com']
->>>>>>> 87405d8ea388ea2259392216ccf94066712be68b
 
 # settings.py
 
