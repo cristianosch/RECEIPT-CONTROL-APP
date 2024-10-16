@@ -90,3 +90,6 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
     Receipts organized by months
 <img height="400px" width="200px" src="pictures/month-detail.png"/> 
     Graph with visual demonstration of expenses divided by category
+
+<test>
+Simple test
