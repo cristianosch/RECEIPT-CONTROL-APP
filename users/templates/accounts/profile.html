@@ -25,7 +25,7 @@
                        width="200" >                            
                    </div>
                    {% endif %}
-                   <form class="text-center" action="dashboard" id="profile" method="POST" enctype="multipart/form-data">
+                   <form class="text-center" action="" id="profile" method="POST" enctype="multipart/form-data">
                        {% csrf_token %}
                        {{form.as_p}}
                        <button class="btn btn-danger btn-round m-2" type="submit">Submit</button>

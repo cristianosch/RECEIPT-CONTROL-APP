@@ -26,7 +26,7 @@ def signUp(request):
 
 @login_required
 def profile(request):
-    profile = request.user.profile
+    profile = request.user
     if request.method == 'POST':
         form = EditProfile(request.POST, request.FILES, instance=profile)
         if form.is_valid():
