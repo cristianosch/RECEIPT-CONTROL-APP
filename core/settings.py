@@ -16,10 +16,8 @@ from dotenv import load_dotenv
 import os
 from decouple import config
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -30,13 +28,16 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
+<<<<<<< HEAD
 #ALLOWED_HOSTS = ['89.116.38.163', 'cristianodev.com']
 ALLOWED_HOSTS = ['localhost']
+=======
+ALLOWED_HOSTS = ['89.116.38.163', 'cristianodev.com']
+>>>>>>> 87405d8ea388ea2259392216ccf94066712be68b
 
 # settings.py
 
 #CSRF_TRUSTED_ORIGINS = ['http://www.cristianodev.com/', 'http://www.cristianodev.com/' , '89.116.38.163']
-
 
 # Application definition
 

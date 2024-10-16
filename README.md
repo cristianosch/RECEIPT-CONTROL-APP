@@ -1,3 +1,7 @@
+❤️ Support and Motivation
+
+Receipt Control App is free for everyone to use, and your support is highly appreciated. If you find the project useful, leaving a star ⭐ on the repository helps motivate the creator to keep improving and expanding the app. Every contribution, no matter how small, makes a difference!
+
 # Receipt Control App - Django and Mindee Integration
 
 <img src="pictures/receipt-example.png" >
@@ -21,8 +25,9 @@ To run this project locally, you’ll need:
 - Python 3.x
 - Django
 - A Mindee account (free tier is sufficient)
+- Redis
 
-### Installation
+## Installation
 
 1. Clone the repository:
    
@@ -51,7 +56,46 @@ To run this project locally, you’ll need:
     python manage.py runserver
 
 7. Open your browser and go to http://127.0.0.1:8000/ to start using Receipt Tracker.
+
+
+## Redis and Celery Setup
+
+To use Celery in this project, you need to have Redis installed as it acts as a message broker for Celery tasks. Here's how to get started:
+
+**Installing Redis**
+
+* For Ubuntu/Debian:
+
+    sudo apt update
+    sudo apt install redis-server
+
+* For macOS (using Homebrew):
+  
+    brew install redis
+
+* For Windows: You can use Redis for Windows or run Redis in a Docker container.
+
+    Follow the link to download redis for windows
+    https://github.com/microsoftarchive/redis/releases
+
    
+**After installation, start the Redis server:**
+
+    sudo service redis-server start
+
+* You can check if Redis is running with:
+   
+    redis-cli ping
+
+You should see PONG if Redis is running correctly.
+    
+
+**Get redis running**
+
+With the project still running, open another terminal for the project and get redis working with the command
+
+    celery -A core worker --loglevel=INFO
+
 
 ### Adjustments and improvements
 
@@ -67,17 +111,17 @@ The project is still under development and the next updates will focus on the fo
 - [x] User creation / login / register
 - [x] Celery - Installed and configured
   
-## 📫 Contribuindo para RECEIPT-CONTROL-APP
+## 📫 Contributing to RECEIPT-CONTROL-APP
 
-Para contribuir com <RECEIPT-CONTROL-APP>, siga estas etapas:
+To contribute to <RECEIPT-CONTROL-APP>, follow these steps:
 
-1. Bifurque este repositório.
-2. Crie um branch: `git checkout -b <nome_branch>`.
-3. Faça suas alterações e confirme-as: `git commit -m '<mensagem_commit>'`
-4. Envie para o branch original: `git push origin <RECEIPT-CONTROL-APP> / <local>`
-5. Crie a solicitação de pull.
+1. Fork this repository.
+2. Create a branch: `git checkout -b <branch_name>`.
+3. Make your changes and commit them: `git commit -m '<commit_message>'`
+4. Push to the original branch: `git push origin <RECEIPT-CONTROL-APP> / <local>`
+5. Create the pull request.
 
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+Alternatively, see GitHub's documentation on [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 
 <img height="200px" width="400" src="pictures/dashboard.png"/>
@@ -90,3 +134,5 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
     Receipts organized by months
 <img height="400px" width="200px" src="pictures/month-detail.png"/> 
     Graph with visual demonstration of expenses divided by category
+
+
