@@ -14,27 +14,26 @@ from pathlib import Path
 from django.contrib.messages import constants
 from dotenv import load_dotenv
 import os
-
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = os.get.env('SET_SECRET_KEY')
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://f2fe-2-56-188-55.ngrok-free.app', 'f2fe-2-56-188-55.ngrok-free.app']
+ALLOWED_HOSTS = ['89.116.38.163', 'cristianodev.com']
 
 # settings.py
 
-CSRF_TRUSTED_ORIGINS = ['https://f2fe-2-56-188-55.ngrok-free.app',]
+CSRF_TRUSTED_ORIGINS = ['http://www.cristianodev.com/', 'http://www.cristianodev.com/' , '89.116.38.163']
 
 # Application definition
 
@@ -129,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'receipt/static'),)
+STATIC_ROOT = os.path.join('static')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -166,7 +168,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # CELERY setup
 
-CELERY_BROKER_URL = 'REDIS://127.0.0.1:6379/0'
+CELERY_BROKER_URL = 'REDIS://89.116.38.163:6379/0'
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
