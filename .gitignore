@@ -4,6 +4,7 @@
 
 venv
 /venv
+git-help.md
 
 ### OSX ###
 .DS_Store
