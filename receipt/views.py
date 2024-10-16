@@ -95,7 +95,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
                                                   .annotate(total_amount=Sum('extracted_total_amount')) \
                                                   .order_by('month')
 
-        monthly_labels = [entry['month'].strftime('%B') for entry in monthly_totals]
+        monthly_labels = [entry['month'].strftime('%M') for entry in monthly_totals]
         monthly_data = [entry['total_amount'] for entry in monthly_totals]
 
         # Obtendo Valores totais por categoria        
@@ -136,7 +136,12 @@ class CategoryTable(LoginRequiredMixin, TemplateView):
 
         monthly_data = {}
         for result in monthly_extracted_category_totals:
-            month = result['month'].strftime('%B %Y')
+            # Verifica se result['month'] não é None
+            if result['month'] is not None:
+                month = result['month'].strftime('%B %Y')
+            else:
+                month = 'Date unavailable Failed to load data'  # Valor padrão caso 'month' seja None
+            
             if month not in monthly_data:
                 monthly_data[month] = {
                     'labels': [],
@@ -210,6 +215,32 @@ def receipts_by_month(request, year, month):
 
     return render(request, 'receipts/receipts_by_month.html', context)
 
+@login_required
+def receipts(request):
+    items_per_page = request.GET.get('items_per_page', 5)  # Pega o valor da URL ou usa o padrão de 10
+    # Obter todos os meses e anos com base na data extraída do recibo
+    receipts = Receipt.objects.filter(extraction_results__extracted_date__isnull=False) \
+        .annotate(month=TruncMonth('extraction_results__extracted_date')) \
+        .values('month') \
+        .annotate(count=Count('id')) \
+        .order_by('-month')
+
+    # Criar uma lista de meses e anos
+    months = [{'year': receipt['month'].year, 'month': receipt['month'].month, 'count': receipt['count']} for receipt in receipts]
+
+    # Configurar o paginator
+    paginator = Paginator(receipts, items_per_page)
+
+    # Pegar o número da página atual da URL (GET request)
+    page_number = request.GET.get('page')
+    
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'receipts/receipts.html', {
+        'months': months,
+        'page_obj': page_obj
+        })
+
 
 @login_required
 def edit_receipt(request, pk):
@@ -253,32 +284,6 @@ def edit_receipt(request, pk):
     return render(request, 'receipts/edit_receipt.html', context)
 
     
-@login_required
-def receipts(request):
-    items_per_page = request.GET.get('items_per_page', 5)  # Pega o valor da URL ou usa o padrão de 10
-    # Obter todos os meses e anos com base na data extraída do recibo
-    receipts = Receipt.objects.filter(extraction_results__extracted_date__isnull=False) \
-        .annotate(month=TruncMonth('extraction_results__extracted_date')) \
-        .values('month') \
-        .annotate(count=Count('id')) \
-        .order_by('-month')
-
-    # Criar uma lista de meses e anos
-    months = [{'year': receipt['month'].year, 'month': receipt['month'].month, 'count': receipt['count']} for receipt in receipts]
-
-    # Configurar o paginator
-    paginator = Paginator(receipts, items_per_page)
-
-    # Pegar o número da página atual da URL (GET request)
-    page_number = request.GET.get('page')
-    
-    page_obj = paginator.get_page(page_number)
-
-    return render(request, 'receipts/receipts.html', {
-        'months': months,
-        'page_obj': page_obj
-        })
-
 
 
 
