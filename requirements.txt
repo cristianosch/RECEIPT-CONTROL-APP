@@ -22,6 +22,7 @@ django-embed-video==1.4.9
 django-extensions==3.2.3
 exchange_calendars==4.5.5
 fonttools==4.53.1
+gunicorn==23.0.0
 html5lib==1.1
 idna==3.8
 kaleido==0.2.1
