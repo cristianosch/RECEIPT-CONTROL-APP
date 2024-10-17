@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 import os
 from decouple import config
 
-# Carrega as variáveis do arquivo .env
+# Loads variables from the .env file
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
