@@ -15,42 +15,42 @@
                   <section class="alert {{message.tags}}">{{message}}</section>
               {% endfor %} 
             {% endif %}
-                <ul>
-                    {% for entry in months %}
-                    <div class="alert alert-info mr-4">
-                        <li>
+                
+                    {% for entry in result %}
+                    <div class="alert alert-info mr-4">                        
                             <a class="color-label" href="{% url 'receipts_by_month' year=entry.year month=entry.month %}">
-                                {{ entry.month }}/{{ entry.year }} 
-                                <p> ({{ entry.count|date:"B Y" }}
-                                  {% if entry.count == 1 %}
-                                   Receipt )
-                                   {% else %} 
-                                   Receipts )</p>
-                                   {% endif %}
-                            </a>
-                        </li>
+                              <h3><span>{{ entry.month }}</span></h3> <h5 class="text-right"><span>{{ entry.year }}</span></h5>
+                              <p> <span>
+                                {{ entry.count }}
+                                {% if entry.count == 1 %}
+                                   Receipt 
+                                {% else %} 
+                                   Receipts 
+                              </span></p>
+                                {% endif %}
+                            </a>                        
                     </div>
                     {% endfor %}
-                </ul>
+                
 
-                <!-- Paginação -->
-                <div class="pagination">
-                  <span class="step-links">
-                      {% if page_obj.has_previous %}
-                          <a href="?page=1">&laquo; first</a>
-                          <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                      {% endif %}
+                <!-- Paginador -->
+<div class="pagination">
+  <span class="step-links">
+      {% if page_obj.has_previous %}
+          <a href="?page=1&items_per_page={{ page_obj.paginator.per_page }}">First</a>
+          <a href="?page={{ page_obj.previous_page_number }}&items_per_page={{ page_obj.paginator.per_page }}">Previous</a>
+      {% endif %}
 
-                      <span class="current">
-                          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                      </span>
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
 
-                      {% if page_obj.has_next %}
-                          <a href="?page={{ page_obj.next_page_number }}">next</a>
-                          <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                      {% endif %}
-                  </span>
-                </div>
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}&items_per_page={{ page_obj.paginator.per_page }}">Next</a>
+          <a href="?page={{ page_obj.paginator.num_pages }}&items_per_page={{ page_obj.paginator.per_page }}">Last</a>
+      {% endif %}
+  </span>
+</div>
           </div>
         </div>
       </div>
@@ -58,3 +58,4 @@
 </div>
 
 {% endblock %}
+

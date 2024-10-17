@@ -5879,7 +5879,13 @@ a.badge-darker.focus {
 .alert-info {
   color: #1d8cf8;
   background-color: #419ef9;
-  border-color: #419ef9;
+  border-color: #419ef9;   
+  cursor: pointer; 
+}
+
+.alert-info:hover{
+  background-color: #f9a141e6;  
+  color: black;  
 }
 
 .alert-info hr {

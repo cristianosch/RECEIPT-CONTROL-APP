@@ -20,6 +20,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from .tasks import process_image_extraction
+import calendar
 
 
 def get_last_three_months():
@@ -226,7 +227,8 @@ def receipts(request):
         .order_by('-month')
 
     # Criar uma lista de meses e anos
-    months = [{'year': receipt['month'].year, 'month': receipt['month'].month, 'count': receipt['count']} for receipt in receipts]
+    result = [{'year': receipt['month'].year, 'month': receipt['month'].month, 'count': receipt['count']} for receipt in receipts]
+
 
     # Configurar o paginator
     paginator = Paginator(receipts, items_per_page)
@@ -237,7 +239,7 @@ def receipts(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'receipts/receipts.html', {
-        'months': months,
+        'result': result,
         'page_obj': page_obj
         })
 
