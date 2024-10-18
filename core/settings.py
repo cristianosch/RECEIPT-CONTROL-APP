@@ -14,7 +14,7 @@ from pathlib import Path
 from django.contrib.messages import constants
 from dotenv import load_dotenv
 import os
-from decouple import config
+from decouple import config, Csv
 
 # Loads variables from the .env file
 load_dotenv()
@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')  # Add a key here for your project EX. '$d6%u-0b2yym)nqvd#^jxk@ctkd2i*boz<42*kz!tbivh9&-c0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') # Comment this line to run the project locally
+DEBUG = os.getenv('DEBUG', default=False, cast=bool) # Comment this line to run the project locally
 # DEBUB = True    # Uncomment this line to run the project locally
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv()) # Comment this line to run the project locally
