@@ -5,7 +5,7 @@
 venv
 /venv
 git-help.md
-
+services/
 ### OSX ###
 .DS_Store
 .AppleDouble
