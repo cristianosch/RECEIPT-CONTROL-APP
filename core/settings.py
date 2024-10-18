@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')  # Add a key here for your project EX. '$d6%u-0b2yym)nqvd#^jxk@ctkd2i*boz<42*kz!tbivh9&-c0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', default=False, cast=bool) # Comment this line to run the project locally
+DEBUG = config('DEBUG', default=False, cast=bool) # Comment this line to run the project locally
 # DEBUB = True    # Uncomment this line to run the project locally
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv()) # Comment this line to run the project locally
@@ -37,7 +37,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv()) # Comment this l
 
 # settings.py
 
-CSRF_TRUSTED_ORIGINS = ['https://www.cristianodev.com/','https://cristianodev.com'] # Comment this line to run the project locally
+#CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS') # Comment this line to run the project locally
+#print('CSRF TRUSTED ORIGINS: ', config('CSRF_TRUSTED_ORIGINS'))
+CSRF_TRUSTED_ORIGINS = ['https://www.cristianodev.com', 'https://cristianodev.com']
 
 # Application definition
 
@@ -102,12 +104,6 @@ DATABASES = {
         'PORT': os.getenv('PORT')
     }
 }
-print(f'Resultado do engine:',os.getenv('ENGINE'))
-print(f'Resultado do nome:',os.getenv('NAME'))
-print(f'Resultado do user:',os.getenv('USER'))
-print(f'Resultado do password:',os.getenv('PASSWORD'))
-print(f'Resultado do host:',os.getenv('HOST'))
-print(f'Resultado do port:',os.getenv('PORT'))
 
     # Uncomment the Database below to run the project locally
 
