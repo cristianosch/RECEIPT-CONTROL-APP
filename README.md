@@ -21,13 +21,13 @@ Receipt Control App is free for everyone to use, and your support is highly appr
 <img src="pictures/receipt-example.png" >
     Example of payment receipt and data capture
 
-## Overview
+# Overview
 
 Receipt Control App is a Django-based project that helps users track their spending by scanning receipts using the [Mindee API](https://www.mindee.com/). The application categorizes expenses and provides monthly comparisons, helping users understand their spending habits in areas such as groceries, restaurants, and fuel stations.
 
 ### Getting Started
 
-## 💻 Prerequisites
+# 💻 Prerequisites
 
 To run this project locally, you’ll need:
 - Python 3.x
@@ -35,7 +35,7 @@ To run this project locally, you’ll need:
 - A Mindee account (free tier is sufficient)
 - Redis
 
-## Installation
+# Installation
 
 ### Redis and Celery Setup
 
@@ -43,22 +43,22 @@ To use Celery in this project, you need to have Redis installed as it acts as a 
 
 **Installing Redis**
 
-* For Ubuntu/Debian:
+**For Ubuntu/Debian:**
 
     sudo apt update
     sudo apt install redis-server
 
-* For macOS (using Homebrew):
+**For macOS (using Homebrew):**
   
     brew install redis
 
-* For Windows: You can use Redis for Windows or run Redis in a Docker container.
+**For Windows: You can use Redis for Windows or run Redis in a Docker container.**
 
     Follow the link to download redis for windows
     https://github.com/microsoftarchive/redis/releases
 
 
-* You can check if Redis is running with:
+**You can check if Redis is running with:**
    
     redis-cli ping
 
@@ -76,7 +76,7 @@ With the project still running, open another terminal for the project and get re
     celery -A core worker --loglevel=INFO
 
 
-## Configuration
+# Configuration
 
 **Clone the repository:**
    
@@ -172,7 +172,7 @@ You should see PONG if Redis is running correctly.
 
     sudo service redis-server start
 
-## Usage
+# Usage
 
 Once the application is running, you can:
 
@@ -191,7 +191,7 @@ Once the application is running, you can:
     * Go to the dashboard to see your spending categorized by type (groceries, restaurants, etc.).
     * Explore monthly reports to compare your expenses over time.
   
-## 📫 Contributing to RECEIPT-CONTROL-APP
+# 📫 Contributing to RECEIPT-CONTROL-APP
 
 To contribute to <RECEIPT-CONTROL-APP>, follow these steps:
 
@@ -206,22 +206,22 @@ To contribute to <RECEIPT-CONTROL-APP>, follow these steps:
 Alternatively, see GitHub's documentation on [how to create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 
-## FAQ
+# FAQ
 
 ### Q: How do I report a bug?
-**A: Please use the issue tracker to report any bugs you encounter.**
+A: Please use the issue tracker to report any bugs you encounter.
 
 ### Q: Can I use the app on mobile devices?
-**A: Yes, the app is designed to be responsive and can be accessed on mobile devices through a web browser.**
+A: Yes, the app is designed to be responsive and can be accessed on mobile devices through a web browser.
 
 ### Q: How do I add a new feature?
-**A: Feel free to suggest new features in the discussions or create a pull request with your implementation.**
+A: Feel free to suggest new features in the discussions or create a pull request with your implementation.
 
-## License
+# License
 
 **This project is licensed under the GNU GPL v3. See the LICENSE file for more details.**
 
-## Some images of the project
+# Some images of the project
 
 <img height="200px" width="400" src="pictures/dashboard.png"/>
     Main Dahsboard
