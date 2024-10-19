@@ -78,28 +78,30 @@ With the project still running, open another terminal for the project and get re
 
 ## Configuration
 
-1. Clone the repository:
+1. **Clone the repository:**
    
     git clone https://github.com/cristianosch/receipt-control-app.git
     cd receipt-control-app
 
-2. Create a virtual environment and activate it:
+
+2. **Create a virtual environment and activate it:**
    
     python -m venv venv
     source venv/bin/activate  # For Windows: venv\Scripts\activate
 
-3. Install dependencies:
+
+3. **Install dependencies:**
 
     pip install -r requirements.txt
 
-4. Set up your environment variables: Create a .env file in the root of your project and add your Mindee API key:
+4. **Set up your environment variables: Create a .env file in the root of your project and add your Mindee API key:**
 
     MINDEE_API_KEY=your-mindee-api-key
 
-5. Edit settings.py:
+5. **Edit settings.py:**
 
 * Set the SECRET_KEY:
-  
+
     SECRET_KEY = 'your-secret-key'  # Add a key here for your project EX. '$d6%u-0b2yym)nqvd#^jxk@ctkd2i*boz<42*kz!tbivh9&-c0'
 
 * Comment out the ALLOWED_HOSTS line, DEBUG and CSRF_TRUSTED_ORIGINS. Uncomment the lines for local ALLOWED_HOSTS line and DEBUG=True:
