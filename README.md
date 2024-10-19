@@ -146,7 +146,7 @@ With the project still running, open another terminal for the project and get re
 
 **Apply migrations:**
    
-   python manage.py migrate
+    python manage.py migrate
 
 **Run the development server:**
 
@@ -162,13 +162,13 @@ For background task processing, make sure you have Redis installed and running. 
     sudo apt update
     sudo apt install redis-server
 
-* You can check if Redis is running with:
+**You can check if Redis is running with:**
    
     redis-cli ping
 
 You should see PONG if Redis is running correctly.
 
-* To start the Redis server, run:
+**To start the Redis server, run:**
 
     sudo service redis-server start
 
@@ -208,15 +208,16 @@ Alternatively, see GitHub's documentation on [how to create a pull request](http
 
 ## FAQ
 
-Q: How do I report a bug?
-A: Please use the issue tracker to report any bugs you encounter.
+### Q: How do I report a bug?
+**A: Please use the issue tracker to report any bugs you encounter.**
 
-Q: Can I use the app on mobile devices?
-A: Yes, the app is designed to be responsive and can be accessed on mobile devices through a web browser.
+### Q: Can I use the app on mobile devices?
+**A: Yes, the app is designed to be responsive and can be accessed on mobile devices through a web browser.**
 
-Q: How do I add a new feature?
-A: Feel free to suggest new features in the discussions or create a pull request with your implementation.
-License
+### Q: How do I add a new feature?
+**A: Feel free to suggest new features in the discussions or create a pull request with your implementation.**
+
+## License
 
 **This project is licensed under the GNU GPL v3. See the LICENSE file for more details.**
 
