@@ -90,21 +90,21 @@ With the project still running, open another terminal for the project and get re
     source venv/bin/activate  # For Windows: venv\Scripts\activate
 
 
-1. **Install dependencies:**
+**Install dependencies:**
 
     pip install -r requirements.txt
 
-2. **Set up your environment variables: Create a .env file in the root of your project and add your Mindee API key:**
+**Set up your environment variables: Create a .env file in the root of your project and add your Mindee API key:**
 
     MINDEE_API_KEY=your-mindee-api-key
 
-3. **Edit settings.py:**
+### Edit settings.py:
 
-* Set the SECRET_KEY:
+**Set the SECRET_KEY:**
 
     SECRET_KEY = 'your-secret-key'  # Add a key here for your project EX. '$d6%u-0b2yym)nqvd#^jxk@ctkd2i*boz<42*kz!tbivh9&-c0'
 
-* Comment out the ALLOWED_HOSTS line, DEBUG and CSRF_TRUSTED_ORIGINS. Uncomment the lines for local ALLOWED_HOSTS line and DEBUG=True:
+**Comment out the ALLOWED_HOSTS line, DEBUG and CSRF_TRUSTED_ORIGINS. Uncomment the lines for local ALLOWED_HOSTS line and DEBUG=True:**
 
     #ALLOWED_HOSTS = ['https://cristianodev.com']
     #DEBUG = os.getenv('DEBUG')
@@ -112,7 +112,7 @@ With the project still running, open another terminal for the project and get re
     ALLOWED_HOSTS = []
     DEBUG = True
 
-* In the Database section, comment the production database settings and uncomment the SQLite settings:
+**In the Database section, comment the production database settings and uncomment the SQLite settings:**
 
     '''
     DATABASES = {
@@ -133,24 +133,26 @@ With the project still running, open another terminal for the project and get re
         }
     }
 
-* Comment out the STATICFILES_DIRS line.
+**Comment out the STATICFILES_DIRS line.**
   
     #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'receipt/static'),)
 
-* Comment out the CELERY_BROKER_URL line and uncomment the line for local Redis:
+**Comment out the CELERY_BROKER_URL line and uncomment the line for local Redis:**
 
     #CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
     CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
-1. Apply migrations: 
+### Update the database
+
+**Apply migrations:**
    
    python manage.py migrate
 
-2. Run the development server:  
+**Run the development server:**
 
     python manage.py runserver localhost:8000
 
-3. Open your browser and go to http://localhost:8000/ to start using Receipt Tracker.
+**Open your browser and go to http://localhost:8000/ to start using Receipt Tracker.**
 
 
 ### Redis and Celery
