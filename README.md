@@ -1,6 +1,6 @@
-📚 Receipt Control App Documentation
+# 📚 Receipt Control App Documentation
 
-# Table of Contents
+## Table of Contents
 
 1. Overview
 2. Prerequisites
@@ -16,16 +16,16 @@
 
 Receipt Control App is free for everyone to use, and your support is highly appreciated. If you find the project useful, leaving a star ⭐ on the repository helps motivate the creator to keep improving and expanding the app. Every contribution, no matter how small, makes a difference!
 
-# Receipt Control App - Django and Mindee Integration
+# Receipt Control App - Django and Mindee Integration - OCR
+
+# 🗨️ Overview
+
+Receipt Control App is a Django-based project that helps users track their spending by scanning receipts using the [Mindee API](https://www.mindee.com/). The application categorizes expenses and provides monthly comparisons, helping users understand their spending habits in areas such as groceries, restaurants, and fuel stations.
 
 <img src="pictures/receipt-example.png" >
     Example of payment receipt and data capture
 
-# Overview
-
-Receipt Control App is a Django-based project that helps users track their spending by scanning receipts using the [Mindee API](https://www.mindee.com/). The application categorizes expenses and provides monthly comparisons, helping users understand their spending habits in areas such as groceries, restaurants, and fuel stations.
-
-### Getting Started
+###  -- Getting Started --
 
 # 💻 Prerequisites
 
@@ -35,7 +35,7 @@ To run this project locally, you’ll need:
 - A Mindee account (free tier is sufficient)
 - Redis
 
-# Installation
+# 🧑‍💻️ Installation
 
 ### Redis and Celery Setup
 
@@ -76,7 +76,7 @@ With the project still running, open another terminal for the project and get re
     celery -A core worker --loglevel=INFO
 
 
-# Configuration
+# 🧠️ Configuration
 
 **Clone the repository:**
    
@@ -98,7 +98,7 @@ With the project still running, open another terminal for the project and get re
 
     MINDEE_API_KEY=your-mindee-api-key
 
-### Edit settings.py:
+## Edit settings.py:
 
 **Set the SECRET_KEY:**
 
@@ -142,7 +142,7 @@ With the project still running, open another terminal for the project and get re
     #CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
     CELERY_BROKER_URL = 'redis://localhost:6379/0'
 
-### Update the database
+## Update the database
 
 **Apply migrations:**
    
@@ -155,7 +155,7 @@ With the project still running, open another terminal for the project and get re
 **Open your browser and go to http://localhost:8000/ to start using Receipt Tracker.**
 
 
-### Redis and Celery
+## Redis and Celery
 
 For background task processing, make sure you have Redis installed and running. Here’s how to install Redis on Ubuntu:
 
@@ -172,7 +172,7 @@ You should see PONG if Redis is running correctly.
 
     sudo service redis-server start
 
-# Usage
+# 🗓️ Usage
 
 Once the application is running, you can:
 
