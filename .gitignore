@@ -1,7 +1,7 @@
 # Created by https://www.gitignore.io
 
 # virtual inviroment
-
+celerybeat-schedule.db
 venv
 /venv
 git-help.md
@@ -10,12 +10,13 @@ services/
 .DS_Store
 .AppleDouble
 .LSOverride
+django.log
 
 # Icon must end with two \r
 Icon
 
-MyREADME.md
-
+MyREAME.md
+static/
 receipts/rcaz.html
 
 media/

@@ -151,13 +151,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join('productionfiles/') # Comment this line to run the local project
-STATIC_ROOT = '/var/www/DJANGO/RECEIPT-CONTROL-APP/'
-
+STATIC_ROOT = os.path.join('static/') # Comment this line to run the local project
+#STATIC_ROOT = '/var/www/DJANGO/RECEIPT-CONTROL-APP/'
+'''
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '/static'),
 ]
-
+'''
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -213,3 +213,24 @@ if not DEBUG:
    SECURE_SSL_REDIRECT = True
    SESSION_COOKIE_SECURE = True
    CSRF_COOKIE_SECURE = True
+
+# Logs Configuration
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
