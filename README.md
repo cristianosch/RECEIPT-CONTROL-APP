@@ -2,12 +2,14 @@
 
 # 🗨️ Overview
 
-Receipt Control App is a Django-based project that helps users track their spending by scanning receipts using the [Mindee API](https://www.mindee.com/). The application categorizes expenses and provides monthly comparisons, helping users understand their spending habits in areas such as groceries, restaurants, and fuel stations.
+* Receipt Control App is a Django-based project that helps users track their spending by scanning receipts using the [Mindee API](https://www.mindee.com/). The application categorizes expenses and provides monthly comparisons, helping users understand their spending habits in areas such as groceries, restaurants, and fuel stations.
 
 <img src="pictures/receipt-example.png" >
     Example of payment receipt and data capture
 
-❤️ Support and Motivation
+<tr>
+
+# ❤️ Support and Motivation
 
 Receipt Control App is free for everyone to use, and your support is highly appreciated. If you find the project useful, leaving a star ⭐ on the repository helps motivate the creator to keep improving and expanding the app. Every contribution, no matter how small, makes a difference!
 
@@ -24,8 +26,6 @@ Receipt Control App is free for everyone to use, and your support is highly appr
 7. FAQ
 8. License
 9. Some images of the project
-
-###  -- Getting Started --
 
 # 💻 Prerequisites
 
