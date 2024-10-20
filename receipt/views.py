@@ -1,16 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from .models import Receipt, ExtractingResults, ExtractedLineItem
-from .forms import ReceiptForm, ExtractingResultsForm, ExtractedLineItemForm, EditExtractingResultsForm, EditExtratedLineItemForm
-from django.contrib.messages import constants
+from .forms import ReceiptForm,EditExtractingResultsForm, EditExtratedLineItemForm
 from django.contrib import messages
 from django.db.models.functions import TruncMonth, TruncYear
-from django.db.models import Count, Q
-from calendar import month_name
+from django.db.models import Count
 from django.utils.dateformat import DateFormat
 from django.db.models import Sum
 from django.views.generic import TemplateView
-from chartjs.views.lines import BaseLineChartView
 from datetime import datetime, timedelta
 from .utils import plot_pie_chart_plotly
 from django.utils.safestring import mark_safe
@@ -20,7 +16,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from .tasks import process_image_extraction
-import calendar
+from django.contrib.auth.models import User
 
 
 def get_last_three_months(request):
