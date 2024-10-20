@@ -23,7 +23,7 @@ from .tasks import process_image_extraction
 import calendar
 
 
-def get_last_three_months():
+def get_last_three_months(request):
     # Obtém a data atual
     current_date = datetime.now()
     
@@ -31,7 +31,7 @@ def get_last_three_months():
     three_months_ago = current_date - timedelta(days=90)
 
     # Filtra os resultados para os últimos três meses
-    last_three_months_totals = ExtractingResults.objects.annotate(month=TruncMonth('extracted_date')) \
+    last_three_months_totals = ExtractingResults.objects.annotate(user=request.user,month=TruncMonth('extracted_date')) \
                                                         .filter(extracted_date__gte=three_months_ago) \
                                                         .values('month') \
                                                         .annotate(total_amount=Sum('extracted_total_amount')) \
@@ -46,14 +46,14 @@ def get_last_three_months():
     }
     
 
-def get_current_month_total():
+def get_current_month_total(request):
     # Obtém o mês e ano atuais
     current_date = datetime.now()
     current_year = current_date.year
     current_month = current_date.month
 
     # Filtra os resultados pelo mês e ano atuais e agrupa por mês
-    current_month_total = ExtractingResults.objects.annotate(month=TruncMonth('extracted_date')) \
+    current_month_total = ExtractingResults.objects.annotate(user=request.user,month=TruncMonth('extracted_date')) \
                                                    .filter(extracted_date__year=current_year, extracted_date__month=current_month) \
                                                    .aggregate(total_amount=Sum('extracted_total_amount'))
 
@@ -64,7 +64,7 @@ def get_current_month_total():
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'receipts/dashboard.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(request, self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         # Obtendo resultado dos ultimos 3 meses
@@ -74,7 +74,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         current_month_total = get_current_month_total()
         
         # Obtendo resultado total do ano
-        year_totals = ExtractingResults.objects.annotate(year=TruncYear('extracted_date')) \
+        year_totals = ExtractingResults.objects.annotate(user=request.user,year=TruncYear('extracted_date')) \
                                               .values('year') \
                                               .annotate(total_amount=Sum('extracted_total_amount')) \
                                               .order_by('year')
@@ -90,7 +90,7 @@ class DashboardView(LoginRequiredMixin, TemplateView):
             year = datetime.now().year
 
         # Obtendo os totais mensais para o gráfico do ano solicitado
-        monthly_totals = ExtractingResults.objects.filter(extracted_date__year=year) \
+        monthly_totals = ExtractingResults.objects.filter(user=request.user,extracted_date__year=year) \
                                                   .annotate(month=TruncMonth('extracted_date')) \
                                                   .values('month') \
                                                   .annotate(total_amount=Sum('extracted_total_amount')) \
@@ -189,7 +189,7 @@ def add_receipt(request):
 @login_required
 def receipts_by_month(request, year, month):
     # Obtenha os resultados da extração filtrados pela data extraída (extracted_date)
-    extraction_results = ExtractingResults.objects.filter(extracted_date__year=year, extracted_date__month=month)
+    extraction_results = ExtractingResults.objects.filter(user=request.user,extracted_date__year=year, extracted_date__month=month)
     
     # Prepara os dados para o template
     receipts_data = []
@@ -220,7 +220,7 @@ def receipts_by_month(request, year, month):
 def receipts(request):
     items_per_page = request.GET.get('items_per_page', 5)  # Pega o valor da URL ou usa o padrão de 10
     # Obter todos os meses e anos com base na data extraída do recibo
-    receipts = Receipt.objects.filter(extraction_results__extracted_date__isnull=False) \
+    receipts = Receipt.objects.filter(user=request.user,extraction_results__extracted_date__isnull=False) \
         .annotate(month=TruncMonth('extraction_results__extracted_date')) \
         .values('month') \
         .annotate(count=Count('id')) \
@@ -259,7 +259,7 @@ def edit_receipt(request, pk):
     )
 
     # Instanciar o form para EditExtractingResults
-    form = EditExtractingResultsForm(instance=extracting_results)
+    form = EditExtractingResultsForm(user=request.user,instance=extracting_results)
     formset = LineItemFormSet(instance=extracting_results)
 
     if request.method == 'POST':
