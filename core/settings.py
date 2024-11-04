@@ -67,6 +67,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Defina o Content-Security-Policy
+#CSP_DEFAULT_SRC = ("'self'",)
+#CSP_FRAME_ANCESTORS = ("'self'",)
+
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
